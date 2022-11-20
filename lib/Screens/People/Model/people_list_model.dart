@@ -3,7 +3,6 @@
 //     final peopleListModel = peopleListModelFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -43,10 +42,6 @@ class PeopleListModel {
     );
 
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      log("Receiving Data");
-      // log("Response :" + response.body);
       List<dynamic> lsDynamic = await jsonDecode(response.body);
       List<PeopleListModel> ls = List<PeopleListModel>.from(
         lsDynamic.map(
@@ -56,9 +51,6 @@ class PeopleListModel {
 
       return ls;
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      log("Exp");
       return null;
     }
   }

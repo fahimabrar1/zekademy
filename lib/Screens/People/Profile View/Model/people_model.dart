@@ -3,6 +3,9 @@
 //     final peopleModel = peopleModelFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:developer';
+
+import 'package:http/http.dart' as http;
 
 PeopleModel peopleModelFromJson(String str) =>
     PeopleModel.fromJson(json.decode(str));
@@ -51,6 +54,24 @@ class PeopleModel {
         "website": website,
         "company": company.toJson(),
       };
+
+  static Future<PeopleModel?> fetchPeopleDetail(int id) async {
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/users/$id'),
+    );
+
+    if (response.statusCode == 200) {
+      log("Receiving Data");
+      log(response.body.toString());
+      dynamic peopleModeljson = await jsonDecode(response.body);
+      PeopleModel peopleModel = PeopleModel.fromJson(peopleModeljson);
+      log(peopleModel.name);
+
+      return peopleModel;
+    } else {
+      return null;
+    }
+  }
 }
 
 class Address {

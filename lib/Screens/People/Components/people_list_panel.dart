@@ -105,7 +105,7 @@ class PeopleListViewPanel extends StatelessWidget {
 }
 
 ///
-/// Shimmer panels
+/// PeopleListView Shimmer panels
 ///
 class PeopleListViewShimmerPanel extends StatelessWidget {
   final int index;
